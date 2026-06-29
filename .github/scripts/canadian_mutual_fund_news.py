@@ -85,7 +85,7 @@ def clean_text(value: str | None) -> str:
     if not value:
         return ""
     value = html.unescape(re.sub(r"<[^>]+>", " ", value))
-    return re.sub(r"s+", " ", value).strip()
+    return re.sub(r"\\s+", " ", value).strip()
 
 
 def parse_published(value: str | None) -> datetime | None:
@@ -198,8 +198,7 @@ def build_briefing(items: list[NewsItem], report_date: datetime) -> str:
                 "The search covered Canadian mutual fund news, regulatory sources, fund flows, fees, launches, closures, advisor/channel news, and ETF competition.",
             ]
         )
-        return "
-".join(lines)
+        return "\n".join(lines)
 
     for index, item in enumerate(items, start=1):
         lines.extend(
@@ -214,9 +213,7 @@ def build_briefing(items: list[NewsItem], report_date: datetime) -> str:
                 "",
             ]
         )
-    return "
-".join(lines).strip() + "
-"
+    return "\n".join(lines).strip() + "\n"
 
 
 def github_api(method: str, path: str, payload: dict | None = None) -> dict:
