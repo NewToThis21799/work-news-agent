@@ -254,7 +254,7 @@ def should_run_now(force: bool) -> bool:
     if force:
         return True
     now = datetime.now(TORONTO)
-    return now.hour == 6 and now.minute == 15
+    return now.hour == 6
 
 
 def main() -> int:
